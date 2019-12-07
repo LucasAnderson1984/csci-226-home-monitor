@@ -1,5 +1,5 @@
 from picamera import PiCamera
-import Sentinal
+from classes.sentinal import Sentinal
 from time import sleep
 
 def main():
