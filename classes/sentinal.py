@@ -9,10 +9,8 @@ class Sentinal:
         self.camera.rotation = 180
 
     def capture(self):
-        self.camera.start_preview()
         sleep(2)
         self.camera.capture('./images/image_%s.jpg' % self.__seconds())
-        self.camera.stop_preview()
 
 # Score range [-1, 1] with a value of one being a “perfect match”.
 # Diff contains the actual image differences between the two input images that
@@ -21,6 +19,13 @@ class Sentinal:
         img_one, img_two, img_three = self.__convert_images(images)
         (score, diff) = compare_ssim(img_one, img_two, full=True)
         print(f'Score: {score}\tDifference: {diff}')
+
+    def off_duty():
+        self.camera.stop_preview()
+
+    def on_duty():
+        self.camera.start_preview()
+        sleep(5)
 
     def __convert_images(self, images):
         return self.__grayscale([cv2.imread(image) for image in images])

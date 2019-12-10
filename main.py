@@ -6,6 +6,7 @@ from classes.sentinal import Sentinal
 def main():
     image_path = './images/*.jpg'
     sentinal = Sentinal(PiCamera())
+    sentinal.onDuty()
 
     for image in glob(image_path):
         os.remove(image)
@@ -16,6 +17,8 @@ def main():
     images = [image for image in glob(image_path)]
 
     sentinal.compare(images)
+
+    sentinal.offDuty()
 
 if __name__== "__main__":
     main()
