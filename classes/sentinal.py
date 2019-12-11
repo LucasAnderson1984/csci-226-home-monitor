@@ -33,10 +33,10 @@ class Sentinal:
               f'\tDifference: {abs(score1 - score2)}')
 
         if(abs(score1 - score2) > 0.002):
-            if(send_message):
+            if(self.send_message):
                 print("Message Dispatched")
-                dispatcher.send_message(self.__detection_message())
-                send_message = False
+                self.dispatcher.send_message(self.__detection_message())
+                self.send_message = False
             else:
                 print("Movement")
 

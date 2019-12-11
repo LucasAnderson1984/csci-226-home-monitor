@@ -4,19 +4,18 @@ import yaml
 
 class Dispatcher:
     def __init__(self):
-        self.context = ssl.create_default_context()
-
         with open(r'./config/application.yml') as file:
             self.application = yaml.load(file, Loader=yaml.FullLoader)
 
     def send_message(self, message):
+        context = ssl.create_default_context()
         with smtplib.SMTP(
             self.application['SMTP_SERVER'],
             self.application['PORT']
         ) as server:
-            server.starttls(context=self.context)
+            server.starttls(context=context)
             server.login(
-                self.application['SENDER_EMAIL'],
+                self.application['USERNAME'],
                 self.application['PASSWORD']
             )
             server.sendmail(
