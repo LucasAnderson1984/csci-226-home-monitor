@@ -9,7 +9,7 @@ class Dispatcher:
         with open(r'./config/application.yml') as file:
             self.application = yaml.load(file, Loader=yaml.FullLoader)
 
-    def send_message(self, message)
+    def send_message(self, message):
         with smtplib.SMTP(
             self.application['SMTP_SERVER'],
             self.application['PORT']
