@@ -17,13 +17,14 @@ class Sentinal:
 # we wish to visualize.
     def compare(self, images):
         img_one, img_two, img_three = self.__convert_images(images)
-        (score, diff) = compare_ssim(img_one, img_two, full=True)
-        print(f'Score: {score}\tDifference: {diff}')
+        (score1, diff1) = compare_ssim(img_one, img_two, full=True)
+        (score2, diff2) = compare_ssim(img_two, img_three, full=True)
+        print(f'Score1: {score1}\tScore2: {score2}')
 
-    def off_duty():
+    def off_duty(self):
         self.camera.stop_preview()
 
-    def on_duty():
+    def on_duty(self):
         self.camera.start_preview()
         sleep(5)
 
