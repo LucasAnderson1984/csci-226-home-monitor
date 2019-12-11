@@ -1,0 +1,9 @@
+PORT: 587
+SMTP_SERVER: smtp.gmail.com
+SENDER_EMAIL: no-reply@homesecuritypi.com
+RECEIVER_EMAIL: your_email@mail.fresnostate.edu
+PASSWORD: ''
+MOVEMENT_MESSAGE: There has been movement detected in your home.
+MOVEMENT_SUBJECT: Movement Detected
+RECORDING_MESSAGE: A recording of the detected movement has been uploaded to your Amazon AWS S3 folder.
+RECORDING_SUBJECT: Recording Has Been Uploaded
