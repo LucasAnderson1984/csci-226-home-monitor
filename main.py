@@ -21,7 +21,7 @@ def main():
         sentinal.capture()
         sleep(2)
 
-    images = [image for image in glob(image_path)]]
+    images = [image for image in glob(image_path)]
     images.sort(reverse=False)
 
     print(images)
