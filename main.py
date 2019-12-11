@@ -27,7 +27,8 @@ def main():
     print(images)
 
     print('Start compare:', datetime.now())
-    for x in range(10):
+    for x in range(20):
+        print('Comparing:', datetime.now())
         sentinal.compare(images)
         os.remove(images.pop(0))
         images.append(sentinal.capture())
