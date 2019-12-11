@@ -22,9 +22,10 @@ class Sentinal:
         (score1, diff1) = structural_similarity(img_one, img_two, full=True)
         (score2, diff2) = structural_similarity(img_two, img_three, full=True)
 
-        print(f'Score1: {score1}\tScore2: {score2}')
+        print(f'Score1: {score1}\tScore2: {score2}',
+              f'\tDifference: {abs(score1 - score2)}')
 
-        if(abs(score1 - score2) > 0.001):
+        if(abs(score1 - score2) > 0.002):
             print("Movement")
 
     def off_duty(self):
