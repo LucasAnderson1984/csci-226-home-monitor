@@ -19,8 +19,8 @@ class Sentinal:
     def compare(self, images):
         img_one, img_two, img_three = self.__convert_images(images)
 
-        (score1, diff1) = compare_ssim(img_one, img_two, full=True)
-        (score2, diff2) = compare_ssim(img_two, img_three, full=True)
+        (score1, diff1) = structural_similarity(img_one, img_two, full=True)
+        (score2, diff2) = structural_similarity(img_two, img_three, full=True)
 
         print(f'Score1: {score1}\tScore2: {score2}')
 
