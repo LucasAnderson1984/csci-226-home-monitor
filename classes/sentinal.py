@@ -2,11 +2,18 @@ from skimage.metrics import structural_similarity
 import cv2
 from datetime import datetime
 from time import sleep
+import yaml
 
 class Sentinal:
-    def __init__(self, camera):
+    send_message = True
+
+    def __init__(self, camera, dispatcher):
         self.camera = camera
         self.camera.rotation = 180
+        self.dispatcher = dispatcher
+
+        with open(r'./config/application.yml') as file:
+            self.application = yaml.load(file, Loader=yaml.FullLoader)
 
     def capture(self):
         filename = './images/image_%s.jpg' % self.__seconds()
@@ -26,7 +33,12 @@ class Sentinal:
               f'\tDifference: {abs(score1 - score2)}')
 
         if(abs(score1 - score2) > 0.002):
-            print("Movement")
+            if(self.send_message):
+                print("Message Dispatched")
+                self.dispatcher.send_message(self.__detection_message())
+                self.send_message = False
+            else:
+                print("Movement")
 
     def off_duty(self):
         self.camera.stop_preview()
@@ -38,8 +50,18 @@ class Sentinal:
     def __convert_images(self, images):
         return self.__grayscale([cv2.imread(image) for image in images])
 
+    def __detection_message(self):
+        subject = self.application['MOVEMENT_SUBJECT']
+        message = self.application['MOVEMENT_MESSAGE']
+        return f'Subject: {subject}\r\n{message}'
+
     def __grayscale(self, images):
         return [cv2.cvtColor(image, cv2.COLOR_BGR2GRAY) for image in images]
+
+    def __recording_message(self):
+        subject = self.application['RECORDING_SUBJECT']
+        message = self.application['RECORDING_MESSAGE']
+        return f'Subject: {subject}\r\n{message}'
 
     def __seconds(self):
         return (datetime.now() - datetime(2019, 1, 1)).seconds

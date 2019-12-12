@@ -1,4 +1,5 @@
 from datetime import datetime
+from classes.dispatcher import Dispatcher
 from glob import glob
 import os
 from picamera import PiCamera
@@ -13,7 +14,7 @@ def main():
         os.remove(image)
 
     print('Start sentinal:', datetime.now())
-    sentinal = Sentinal(PiCamera())
+    sentinal = Sentinal(PiCamera(), Dispatcher())
     sentinal.on_duty()
 
     print('Start capture:', datetime.now())
