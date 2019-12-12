@@ -11,7 +11,8 @@ import yaml
 class Sentinal:
     send_message = True
 
-    # Inialize camera, watchmen and dispatcher. Rotates camera 180 degrees.
+    # Inialize camera, watchmen and dispatcher. Rotates camera 180 degrees. Load
+    # yaml file for application.
     def __init__(self, camera, dispatcher):
         self.camera = camera
         self.camera.rotation = 180
