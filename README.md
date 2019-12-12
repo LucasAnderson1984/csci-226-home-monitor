@@ -11,7 +11,7 @@ After the comparison, the oldest picture in the images folder is deleted. This i
 ## Setup
 
 #### Linux libraries to install
-```Linux
+```
 sudo apt-get install build-essential
 sudo apt-get cython3
 sudo apt-get install python3-matplotlib
@@ -23,7 +23,7 @@ sudo apt-get install python3-tk
 ```
 
 #### Python libraries to install
-```Python
+```
 pip3 install --upgrade DateTime
 pip3 install --upgrade glob3
 pip3 install --upgrade opencv-python
@@ -35,6 +35,6 @@ pip3 install --upgrade scikit-image
 Copy application.example.yml and rename it application.yml. Change the values in the yaml file with the correct emails, passwords, etc. to connect to your email provider and send your message.
 
 ###### Command Line Copy in Linux
-```Linux
+```
 cp config/application.example.yml config/application.yml
 ```
