@@ -37,7 +37,7 @@ class Dispatcher:
     # Uploads video to AWS S3 bucket
     def store_video(self):
         # Get video file in videos folder
-        file = glob('videos/video*')
+        file = glob('videos/*.h264')[0]
 
         # Load S3 credentials
         s3 = boto3.client(
@@ -49,7 +49,7 @@ class Dispatcher:
         # Try to upload video to S3
         try:
             s3.upload_file(
-                os.path.basename(file),
+                file,
                 self.application['S3_BUCKET'],
                 file
             )
