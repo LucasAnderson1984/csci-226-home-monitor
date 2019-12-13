@@ -2,6 +2,7 @@ from skimage.metrics import structural_similarity
 import cv2
 from datetime import datetime
 from time import sleep
+from .watchmen import Watchmen
 import yaml
 
 # Compares images to determine of there is any movement detected. Once detected
@@ -17,6 +18,7 @@ class Sentinal:
         self.camera = camera
         self.camera.rotation = 180
         self.dispatcher = dispatcher
+        self.watchmen = Watchmen(camera)
 
         with open(r'./config/application.yml') as file:
             self.application = yaml.load(file, Loader=yaml.FullLoader)
@@ -50,6 +52,7 @@ class Sentinal:
             if(self.send_message):
                 print("Message Dispatched")
                 self.dispatcher.send_message(self.__detection_message())
+                self.watchmen.start_capture()
                 self.send_message = False
             else:
                 print("Movement")
@@ -58,6 +61,8 @@ class Sentinal:
         # recording to AWS S3 bucket and reset message state.
         if abs(score1 - score2) < 0.002 and not self.send_message:
             print("Recording Uploaded")
+            self.watchmen.stop_capture()
+            sleep(1)
             self.dispatcher.store_video()
             self.send_message = True
 
