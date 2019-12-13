@@ -47,7 +47,7 @@ class Dispatcher:
 
         # Try to upload video to S3
         try:
-            s3.upload_file(file, self.application['BUCKET'], None)
+            s3.upload_file(file, self.application['S3_BUCKET'], None)
             print("Upload Successful")
             return True
         except FileNotFoundError:
