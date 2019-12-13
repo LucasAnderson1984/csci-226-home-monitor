@@ -1,6 +1,7 @@
 import boto3
 from botocore.exceptions import NoCredentialsError
 from glob import glob
+import os
 import smtplib
 import ssl
 import yaml
@@ -47,7 +48,11 @@ class Dispatcher:
 
         # Try to upload video to S3
         try:
-            s3.upload_file(file, self.application['S3_BUCKET'], None)
+            s3.upload_file(
+                os.path.basename(file),
+                self.application['S3_BUCKET'],
+                file
+            )
             print("Upload Successful")
             return True
         except FileNotFoundError:
