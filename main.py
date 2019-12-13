@@ -45,7 +45,7 @@ def main():
     print('Start compare:', datetime.now())
     while True:
         # Used to stop loop when enter key is pressed
-        time.sleep(1)
+        sleep(1)
         i,o,e = select([sys.stdin],[],[],0.0001)
         if i == [sys.stdin]: break
 

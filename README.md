@@ -25,6 +25,8 @@ sudo apt-get install python3-tk
 #### Python libraries to install
 ```
 pip3 install --upgrade DateTime
+pip3 install --upgrade boto3
+pip3 install --upgrade botocore
 pip3 install --upgrade glob3
 pip3 install --upgrade opencv-python
 pip3 install --upgrade picamera
