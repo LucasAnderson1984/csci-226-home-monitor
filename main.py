@@ -1,5 +1,6 @@
 from datetime import datetime
 from classes.dispatcher import Dispatcher
+from classes.watchmen import Watchmen
 from glob import glob
 import os
 from picamera import PiCamera
@@ -24,7 +25,8 @@ def main():
 
     print('Start sentinal:', datetime.now())
     # Initialize Sentinal with camera, dispatcher and watchmen instance
-    sentinal = Sentinal(PiCamera(), Dispatcher())
+    watchmen = Watchmen(PiCamera())
+    sentinal = Sentinal(PiCamera(), Dispatcher(), watchmen)
     sentinal.on_duty() # Turn camera on
 
     # Take first three photos every 2 seconds

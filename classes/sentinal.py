@@ -13,10 +13,11 @@ class Sentinal:
 
     # Inialize camera, watchmen and dispatcher. Rotates camera 180 degrees. Load
     # yaml file for application.
-    def __init__(self, camera, dispatcher):
+    def __init__(self, camera, dispatcher, watchmen):
         self.camera = camera
         self.camera.rotation = 180
         self.dispatcher = dispatcher
+        self.watchmen = watchmen
 
         with open(r'./config/application.yml') as file:
             self.application = yaml.load(file, Loader=yaml.FullLoader)
@@ -50,6 +51,7 @@ class Sentinal:
             if(self.send_message):
                 print("Message Dispatched")
                 self.dispatcher.send_message(self.__detection_message())
+                self.watchmen.start_capture()
                 self.send_message = False
             else:
                 print("Movement")
@@ -58,6 +60,8 @@ class Sentinal:
         # recording to AWS S3 bucket and reset message state.
         if abs(score1 - score2) < 0.002 and not self.send_message:
             print("Recording Uploaded")
+            self.watchmen.stop_capture()
+            sleep(1)
             self.dispatcher.store_video()
             self.send_message = True
 
