@@ -1,6 +1,5 @@
 from datetime import datetime
 from classes.dispatcher import Dispatcher
-from classes.watchmen import Watchmen
 from glob import glob
 import os
 from picamera import PiCamera

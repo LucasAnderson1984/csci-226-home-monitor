@@ -2,6 +2,7 @@ from skimage.metrics import structural_similarity
 import cv2
 from datetime import datetime
 from time import sleep
+from watchmen import Watchmen
 import yaml
 
 # Compares images to determine of there is any movement detected. Once detected
@@ -13,11 +14,11 @@ class Sentinal:
 
     # Inialize camera, watchmen and dispatcher. Rotates camera 180 degrees. Load
     # yaml file for application.
-    def __init__(self, camera, dispatcher, watchmen):
+    def __init__(self, camera, dispatcher):
         self.camera = camera
         self.camera.rotation = 180
         self.dispatcher = dispatcher
-        self.watchmen = watchmen
+        self.watchmen = Watchmen(camera)
 
         with open(r'./config/application.yml') as file:
             self.application = yaml.load(file, Loader=yaml.FullLoader)
