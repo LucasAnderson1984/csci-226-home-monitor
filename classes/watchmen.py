@@ -1,6 +1,5 @@
 from datetime import datetime
 from time import sleep
-from picamera import PiCamera
 import threading
 
 class Watchmen:
@@ -10,8 +9,8 @@ class Watchmen:
     #
     # @param path The base directory where video files should be saved
     #
-    def __init__(self, path="./videos/"):
-        self._camera = PiCamera()
+    def __init__(self, camera, path="./videos/"):
+        self._camera = camera
         self._stop_flag = False
         self._path = path
 

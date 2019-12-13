@@ -54,7 +54,7 @@ class Dispatcher:
                 file
             )
             print("Upload Successful")
-            os.remove(file.pop())
+            os.remove(file)
             return True
         except FileNotFoundError:
             print("The file was not found")

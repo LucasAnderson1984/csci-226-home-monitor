@@ -2,7 +2,7 @@ from skimage.metrics import structural_similarity
 import cv2
 from datetime import datetime
 from time import sleep
-from watchmen import Watchmen
+from .watchmen import Watchmen
 import yaml
 
 # Compares images to determine of there is any movement detected. Once detected
