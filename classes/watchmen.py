@@ -33,7 +33,7 @@ class Watchmen:
         file_name = self._path + "video_%s.h264" % self.__seconds()
         try:
             print("Started Recording:", datetime.now())
-            print('New recording name:' file_name)
+            print('New recording name:', file_name)
             self._camera.start_recording(file_name)
             while(self._stop_flag == False):
                 sleep(1)
