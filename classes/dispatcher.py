@@ -54,6 +54,7 @@ class Dispatcher:
                 file
             )
             print("Upload Successful")
+            print('Delete local recording', file)
             os.remove(file)
             return True
         except FileNotFoundError:

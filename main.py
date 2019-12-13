@@ -52,8 +52,12 @@ def main():
         # Compare and then capture new images
         print('Comparing:', datetime.now())
         sentinal.compare(images)
-        os.remove(images.pop(0))
-        images.append(sentinal.capture())
+        old_image = images.pop(0)
+        print('Deleting image:', old_image)
+        os.remove(old_image)
+        new_image = sentinal.capture()
+        print('Storing new image:', new_image)
+        images.append(new_image)
 
     print('Start Off Duty:', datetime.now())
     sentinal.off_duty() # Turn off camera
