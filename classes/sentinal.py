@@ -56,7 +56,7 @@ class Sentinal:
 
         # If there is not longer any movement detected, then upload the
         # recording to AWS S3 bucket and reset message state.
-        if not self.send_message:
+        if abs(score1 - score2) < 0.002 and not self.send_message:
             print("Recording Uploaded")
             self.dispatcher.store_video()
             self.send_message = True

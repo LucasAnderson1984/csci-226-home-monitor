@@ -41,8 +41,8 @@ class Dispatcher:
         # Load S3 credentials
         s3 = boto3.client(
             's3',
-            aws_access_key_id=self.application['ACCESS_KEY'],
-            aws_secret_access_key=self.application['SECRET_KEY']
+            aws_access_key_id=self.application['S3_ACCESS_KEY'],
+            aws_secret_access_key=self.application['S3_SECRET_KEY']
         )
 
         # Try to upload video to S3
