@@ -1,13 +1,24 @@
-import numpy as np
+from datetime import datetime
+from time import sleep
+from picamera import PiCamera
 import threading
-import cv2
 
-class Watchmen(self):
 
-    def __init__(self, camera):
-        self.camera = camera
+class Watchmen:
+
+    ##
+    # Constructor
+    #
+    # @param path The base directory where video files should be saved
+    #
+    def __init__(self, path="./videos/"):
+        self._camera = PiCamera()
         self._stop_flag = False
+        self._path = path
 
+    ##
+    # Starts Video capturing
+    #
     def start_capture(self):
 
         self._stop_flag = False
@@ -16,22 +27,30 @@ class Watchmen(self):
         thread1 = threading.Thread(target=self._capture_thread)
         thread1.start()
 
-    def _capture_thread(self, capture_object):
+    ##
+    # Code to start camera hardware recording
+    #
+    def _capture_thread(self):
 
-        capture_object = cv2.VideoCapture(0)
+        file_name = self._path + "video_%s.h264" % self.__seconds()
+        try:
+            self._camera.start_recording(file_name)
+            while(self._stop_flag == False):
+                sleep(1)
+        finally:
+            self._camera.close()
 
-        while capture_object.isOpened():
-
-            success, frame = capture_object.read()
-
-            if success:
-                cv2.imshow('Frame', frame)          # Show the thread - Need to change to saving to file
-
-            if self._stop_flag:
-                break
-
-        capture_object.release()                # Release the video capture object
-        cv2.destroyAllWindows()                 # Close Frames
-
+    ##
+    # Stops Video Capture
+    #
+    # Sends flag to stop recording thread
+    #
     def stop_capture(self):
         self._stop_flag = True
+
+
+    ##
+    # Helper function to create a unique timestamp
+    #
+    def __seconds(self):
+        return (datetime.now() - datetime(2019, 1, 1)).seconds
