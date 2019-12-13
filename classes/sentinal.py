@@ -46,13 +46,20 @@ class Sentinal:
         # Checks to see if score difference is over the threshold, which
         # indicates there is movement. Once True, then a message is sent and
         # the video will start recording and an email is sent.
-        if(abs(score1 - score2) > 0.002):
+        if abs(score1 - score2) > 0.002:
             if(self.send_message):
                 print("Message Dispatched")
                 self.dispatcher.send_message(self.__detection_message())
                 self.send_message = False
             else:
                 print("Movement")
+
+        # If there is not longer any movement detected, then upload the
+        # recording to AWS S3 bucket and reset message state.
+        if not self.send_message:
+            print("Recording Uploaded")
+            self.dispatcher.store_video()
+            self.send_message = True
 
     # Turns off camera
     def off_duty(self):
