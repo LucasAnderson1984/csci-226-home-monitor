@@ -1,5 +1,3 @@
-ACCESS_KEY: ''
-BUCKET: 'Videos'
 MOVEMENT_MESSAGE: There has been movement detected in your home.
 MOVEMENT_SUBJECT: Movement Detected
 PASSWORD: ''
@@ -7,7 +5,9 @@ PORT: 587
 RECEIVER_EMAIL: your_email@mail.fresnostate.edu
 RECORDING_MESSAGE: A recording of the detected movement has been uploaded to your Amazon AWS S3 folder.
 RECORDING_SUBJECT: Recording Has Been Uploaded
-SECRET_KEY: ''
+S3_ACCESS_KEY: ''
+S3_BUCKET: 'Videos'
+S3_SECRET_KEY: ''
 SENDER_EMAIL: no-reply@homesecuritypi.com
 SMTP_SERVER: smtp.gmail.com
 USERNAME: 'your_email@mail.fresnostate.edu'
